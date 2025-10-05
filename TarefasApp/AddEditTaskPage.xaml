@@ -2,32 +2,76 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TarefasApp.AddEditTaskPage"
-             Title="Nova Tarefa">
+             Title="{Binding Title, Mode=OneWay, FallbackValue='Nova Tarefa'}"
+             BackgroundColor="#F9F9F9">
+
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="12">
+        <VerticalStackLayout Padding="20" Spacing="15">
 
-            <Label Text="Título:" FontAttributes="Bold"/>
-            <Entry x:Name="TitleEntry" Placeholder="Digite o título"/>
+            <!-- Título -->
+            <Label Text="Título:" FontAttributes="Bold" FontSize="16" TextColor="#2B2B2B"/>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5"
+                   HasShadow="True">
+                <Entry x:Name="TitleEntry" Placeholder="Digite o título"/>
+            </Frame>
 
-            <Label Text="Descrição:" FontAttributes="Bold"/>
-            <Editor x:Name="DescriptionEditor" Placeholder="Descrição da tarefa" AutoSize="TextChanges"/>
+            <!-- Descrição -->
+            <Label Text="Descrição:" FontAttributes="Bold" FontSize="16" TextColor="#2B2B2B"/>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5"
+                   HasShadow="True">
+                <Editor x:Name="DescriptionEditor"
+                        Placeholder="Digite a descrição"
+                        AutoSize="TextChanges"
+                        HeightRequest="100"/>
+            </Frame>
 
-            <Label Text="Data de criação:" FontAttributes="Bold"/>
-            <DatePicker x:Name="DatePicker" />
+            <!-- Data de criação -->
+            <Label Text="Data de criação:" FontAttributes="Bold" FontSize="16" TextColor="#2B2B2B"/>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5"
+                   HasShadow="True">
+                <DatePicker x:Name="DatePicker"/>
+            </Frame>
 
-            <Label Text="Prioridade:" FontAttributes="Bold"/>
-            <Picker x:Name="PriorityPicker" Title="Selecione uma prioridade">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Baixa</x:String>
-                        <x:String>Média</x:String>
-                        <x:String>Alta</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <!-- Prioridade -->
+            <Label Text="Prioridade:" FontAttributes="Bold" FontSize="16" TextColor="#2B2B2B"/>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="5"
+                   HasShadow="True">
+                <Picker x:Name="PriorityPicker" Title="Selecione uma prioridade">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Baixa</x:String>
+                            <x:String>Média</x:String>
+                            <x:String>Alta</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Frame>
 
-            <Button Text="Salvar" Clicked="OnSaveClicked" />
-            <Button Text="Cancelar" Clicked="OnCancelClicked" />
+            <!-- Botões -->
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center" Margin="0,20,0,0">
+                <Button Text="💾 Salvar"
+                        BackgroundColor="#0078D7"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        WidthRequest="120"
+                        Clicked="OnSaveClicked"/>
+                <Button Text="❌ Cancelar"
+                        BackgroundColor="#E81123"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        WidthRequest="120"
+                        Clicked="OnCancelClicked"/>
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

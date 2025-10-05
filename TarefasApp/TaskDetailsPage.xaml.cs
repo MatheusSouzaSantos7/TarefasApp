@@ -29,8 +29,13 @@ namespace TarefasApp
 
         private async void OnEditClicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Editar", "A edição será implementada na Etapa 3.", "OK");
+            var task = BindingContext as TaskItem;
+            if (task != null)
+            {
+                await Shell.Current.GoToAsync($"{nameof(AddEditTaskPage)}?taskId={task.Id}", true);
+            }
         }
+
 
 
         private async void OnDeleteClicked(object sender, EventArgs e)

@@ -1,29 +1,60 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-x:Class="TarefasApp.MainPage"
-Title="Tarefas">
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:TarefasApp.Converters"
+             x:Class="TarefasApp.MainPage"
+             Title="Minhas Tarefas"
+             BackgroundColor="#F9F9F9">
 
+    <VerticalStackLayout Padding="15" Spacing="10">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Adicionar" Clicked="OnAddClicked"/>
-    </ContentPage.ToolbarItems>
+        <!-- Botão Adicionar -->
+        <Button Text="➕ Adicionar Tarefa"
+                BackgroundColor="#0078D7"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="50"
+                Clicked="OnAddClicked"/>
 
+        <!-- Lista de tarefas -->
+        <CollectionView x:Name="TasksCollectionView"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged"
+                        Margin="0,10,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="White"
+                           CornerRadius="10"
+                           Padding="15"
+                           Margin="0,5"
+                           BorderColor="#E0E0E0"
+                           HasShadow="True">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
 
-    <CollectionView x:Name="TasksCollectionView"
-ItemsSource="{Binding Tasks}"
-SelectionMode="Single"
-SelectionChanged="OnSelectionChanged">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame Margin="8" Padding="10" HasShadow="True" CornerRadius="8">
-                    <StackLayout>
-                        <Label Text="{Binding Title}" FontAttributes="Bold"/>
-                        <Label Text="{Binding Description}" LineBreakMode="TailTruncation"/>
-                    </StackLayout>
-                </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                            <!-- Ícone de prioridade -->
+                            <BoxView WidthRequest="15"
+                                     HeightRequest="15"
+                                     CornerRadius="7.5"
+                                     VerticalOptions="Center"
+                                     Color="{Binding Priority, Converter={StaticResource PriorityToColorConverter}}"/>
 
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="#2B2B2B"/>
+                                <Label Text="{Binding Description}"
+                                       FontSize="13"
+                                       TextColor="#555555"
+                                       LineBreakMode="TailTruncation"/>
+                            </VerticalStackLayout>
 
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
 </ContentPage>

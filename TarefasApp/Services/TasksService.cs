@@ -21,7 +21,9 @@ namespace TarefasApp.Services
             Tasks.Add(new TaskItem { Title = "Comprar leite", Description = "Leite, pão e café", Priority = Priority.Medium });
             Tasks.Add(new TaskItem { Title = "Enviar relatório", Description = "Relatório mensal para o gerente", Priority = Priority.High });
             Tasks.Add(new TaskItem { Title = "Treinar C#", Description = "Praticar MAUI por 30 minutos", Priority = Priority.Low });
+
         }
+        public IEnumerable<TaskItem> GetAll() => Tasks;
 
         public TaskItem GetById(Guid id) => Tasks.FirstOrDefault(t => t.Id == id);
         public void Add(TaskItem item) => Tasks.Add(item);

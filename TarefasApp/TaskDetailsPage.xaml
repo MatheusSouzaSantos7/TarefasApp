@@ -2,16 +2,60 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TarefasApp.TaskDetailsPage"
-             Title="Detalhes">
-    <ScrollView>
-        <StackLayout Padding="20" Spacing="12">
-            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="22"/>
-            <Label Text="{Binding Description}"/>
-            <Label Text="{Binding CreatedDate, StringFormat='Criada em: {0:dd/MM/yyyy HH:mm}'}"/>
-            <Label Text="{Binding Priority}"/>
+             Title="Detalhes da Tarefa"
+             BackgroundColor="#F9F9F9">
 
-            <Button Text="Editar" Clicked="OnEditClicked"/>
-            <Button Text="Excluir" Clicked="OnDeleteClicked"/>
-        </StackLayout>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <!-- Título -->
+            <Label Text="{Binding Title}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#2B2B2B" />
+
+            <!-- Descrição -->
+            <Frame BackgroundColor="#FFFFFF"
+                   BorderColor="#E0E0E0"
+                   CornerRadius="10"
+                   Padding="15"
+                   HasShadow="True">
+                <Label Text="{Binding Description}"
+                       FontSize="16"
+                       TextColor="#555555" />
+            </Frame>
+
+            <!-- Data e Prioridade -->
+            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                <Image Source="calendar.png" HeightRequest="20" WidthRequest="20"/>
+                <Label Text="{Binding CreatedDate, StringFormat='Criada em {0:dd/MM/yyyy}'}"
+                       FontSize="14" TextColor="#666"/>
+
+                <BoxView WidthRequest="10"/>
+
+                <Label Text="Prioridade:" FontSize="14" TextColor="#666"/>
+                <Label Text="{Binding Priority}"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="{Binding Priority, Converter={StaticResource PriorityToColorConverter}}"/>
+            </HorizontalStackLayout>
+
+            <!-- Botões -->
+            <HorizontalStackLayout Spacing="15" Margin="0,20,0,0" HorizontalOptions="Center">
+                <Button Text="✏️ Editar"
+                        BackgroundColor="#0078D7"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Clicked="OnEditClicked"
+                        WidthRequest="120"/>
+                <Button Text="🗑️ Excluir"
+                        BackgroundColor="#E81123"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Clicked="OnDeleteClicked"
+                        WidthRequest="120"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

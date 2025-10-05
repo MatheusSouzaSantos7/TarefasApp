@@ -3,7 +3,6 @@ using Microsoft.Maui.Controls;
 using TarefasApp.Models;
 using TarefasApp.Services;
 
-
 namespace TarefasApp
 {
     public partial class MainPage : ContentPage
@@ -11,24 +10,30 @@ namespace TarefasApp
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = TasksService.Instance;
+            LoadTasks(); // carregamento inicial
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadTasks(); // recarrega toda vez que a página volta
+        }
+
+        private void LoadTasks()
+        {
+            var tasks = TasksService.Instance.GetAll();
+            TasksCollectionView.ItemsSource = null; // força atualização visual
+            TasksCollectionView.ItemsSource = tasks;
+        }
 
         private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var task = e.CurrentSelection.FirstOrDefault() as TaskItem;
             if (task == null) return;
 
-
-            // Navega para a página de detalhes passando o Id como query parameter
             await Shell.Current.GoToAsync($"{nameof(TaskDetailsPage)}?taskId={task.Id}");
-
-
-            // limpa seleção
             ((CollectionView)sender).SelectedItem = null;
         }
-
 
         private async void OnAddClicked(object sender, EventArgs e)
         {
