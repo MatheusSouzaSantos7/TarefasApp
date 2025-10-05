@@ -14,7 +14,7 @@
                    CornerRadius="10"
                    Padding="5"
                    HasShadow="True">
-                <Entry x:Name="TitleEntry" Placeholder="Digite o título"/>
+                <Entry x:Name="TitleEntry" Placeholder="Digite o título" TextColor="Black"/>
             </Frame>
 
             <!-- Descrição -->
@@ -26,7 +26,8 @@
                 <Editor x:Name="DescriptionEditor"
                         Placeholder="Digite a descrição"
                         AutoSize="TextChanges"
-                        HeightRequest="100"/>
+                        HeightRequest="100"
+                        TextColor="Black"/>
             </Frame>
 
             <!-- Data de criação -->
